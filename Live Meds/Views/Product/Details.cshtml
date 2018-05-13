@@ -1,0 +1,110 @@
+﻿@model LiveMedsEntity.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductBuyingPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductBuyingPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductSellingPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductSellingPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductSold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductSold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductImagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductImagePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductFormulation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductFormulation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductPackagingType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductPackagingType)
+        </dd>
+
+        <dt>
+            Category
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManufacturerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ManufacturerId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,139 @@
+﻿@model Live_Meds.Models.ProductCategoryManufacturerModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@{
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Create Product</h2>
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Product.ProductName, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Product Name" ,required ="required"} })
+            </div>
+        </div>
+
+        <div class="form-group">
+    
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Product.ProductDescription, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Product Description", required = "required" } })           
+            </div>
+        </div>
+
+        <div class="form-group">
+          
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Product.ProductBuyingPrice, new { htmlAttributes = new { @class = "form-control input-lg", type = "number", placeholder = "Buying Price", required = "required",min ="1", onkeypress = "return event.charCode >= 48 && event.charCode <= 57 || event.keyCode == 8" } })
+                
+            </div>
+        </div>
+
+        <div class="form-group">
+         
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Product.ProductSellingPrice, new { htmlAttributes = new { @class = "form-control input-lg", type = "number", placeholder = "Selling Price", required = "required", min = "1", onkeypress = "return event.charCode >= 48 && event.charCode <= 57 || event.keyCode == 8" } })
+               
+            </div>
+        </div>
+
+        <div class="form-group">
+           
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Product.ProductQuantity, new { htmlAttributes = new { @class = "form-control input-lg", type = "number", placeholder = "Quantiity", required = "required", min = "1", onkeypress = "return event.charCode >= 48 && event.charCode <= 57 || event.keyCode == 8" } })
+               
+            </div>
+        </div>
+        <div class="form-group">
+           
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Product.ProductFormulation, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Formulation", required = "required" } })
+                
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Product.ProductPackagingType, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Packaging Type", required = "required" } })
+               
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h5 class="col-lg-1 control-label">Category</h5>
+            <div class="col-lg-5 selectContainer">
+                <select name="CategoryId" class="form-control">
+                    @foreach (var item in Model.Categories)
+                    {
+                        <option value="@item.CategoryId">@item.CategoryName</option>
+                    }
+                </select>
+                <input class="btn btn-md btn-info" type="button" value="Create New" onclick="MakeVisible()">
+                <input class="form-control input-sm" type="text" id="categoryName" name="CategoryName" placeholder="Category Name" style="display:none">
+                <input class="btn btn-sm btn-success" type="button" value="Add" id="btnCategoryAdd" style="display:none" onclick="AddCategory()">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h5 class="col-lg-1 control-label">Manufacturer</h5>
+            <div class="col-lg-5 selectContainer">
+                <select name="ManufacturerId" class="form-control">
+                    @foreach (var item in Model.Manufactures)
+                    {
+                        <option value="@item.ManufacturerId">@item.ManufactureName</option>
+                    }
+                </select>
+                <input class="btn btn-md btn-info" type="button" value="Create New" onclick="MakeVisibleManufacturer()">
+                <input class="form-control input-sm" type="text" id="manufacturerName" name="ManufacturerName" placeholder="Manufacturer Name" style="display:none">
+                <input class="btn btn-sm btn-success" type="button" value="Add" id="btnManufacturerAdd" style="display:none" onclick="AddManufacturer()">
+            </div>
+        </div>
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.ManufacturerId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ManufacturerId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ManufacturerId, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+        <div class="form-group">
+            <h5 class="col-lg-1 control-label">Image</h5>
+            <div class="col-md-5">
+
+                <img id="image" src="#" alt="" />
+                <input type="file" required name="ImagePath" id="ImagePath" onchange="viewImage(this);" />
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            <div class="col-lg-6">
+                <input type="submit" value="Create" class="btn btn-lg btn-info" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <a id="back" class="btn btn-md btn-info" href="~/Product/Index"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/myscript.js"></script>
+}

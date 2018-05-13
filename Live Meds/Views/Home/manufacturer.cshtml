@@ -1,0 +1,33 @@
+﻿@model IEnumerable<LiveMedsEntity.Manufacturer>
+
+@{
+    ViewBag.Title = "manufacturer";
+}
+
+<h2>manufacturer</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ManufactureName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ManufactureName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ManufacturerId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ManufacturerId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ManufacturerId })
+        </td>
+    </tr>
+}
+
+</table>

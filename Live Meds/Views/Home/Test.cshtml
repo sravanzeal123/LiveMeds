@@ -1,0 +1,50 @@
+﻿@model IEnumerable<LiveMedsEntity.Product>
+@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Test</h2>
+
+<form id="forsearch" method="post">
+    <input id="ProductName" type="text" name="ProductName" />
+    <input id="search" type="submit" value="Search" />
+
+</form>
+
+
+
+<div id="products" class="container">
+    <div class="row">
+
+        <!-- Loop -->
+
+@foreach (var item in Model)
+       {
+        <div class="col-md-3 col-sm-4 col-xs-6">
+            <div class="product">
+                <a href='@string.Format("/Home/Details/{0}/", @Html.DisplayFor(modelItem => item.ProductId))'>
+                    <figure>
+                        <h4>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </h4>
+                        <img src="@Url.Content(item.ProductImagePath)" alt="">
+                    </figure>
+                </a>
+                <div class="info">
+                    <h3>Tk. @Html.DisplayFor(modelItem => item.ProductSellingPrice)</h3>
+                    <button class="btn btn-warning"><img src="~/SiteImages/cart.png" alt=""> ADD TO CART</button>
+                </div>
+            </div>
+        </div><!-- ./col-sm-4 -->
+        }
+        <!-- Loop End -->
+
+    </div>
+</div>
+
+@section styles{
+ <link href="~/Content/bootstrap.css" rel="stylesheet" />
+ <link href="~/Content/mystyles.css" rel="stylesheet" type="text/css" />
+}
+
+

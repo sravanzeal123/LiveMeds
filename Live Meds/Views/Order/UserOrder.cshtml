@@ -1,0 +1,67 @@
+﻿@model IEnumerable<LiveMedsEntity.Order>
+
+@{
+    ViewBag.Title = "UserOrder";
+}
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>UserOrder</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <strong>Order List</strong>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UserId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Total)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OrderTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DeliveryId)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Total)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DeliveryId)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Details", "Details", new { id = item.OrderId })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/UserHome/Profile">Back</a>
+</div>
+@section username{
+    @Session["name"]
+}

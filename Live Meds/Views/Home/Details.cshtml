@@ -1,0 +1,107 @@
+﻿@model LiveMedsEntity.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+
+<div class="container">
+    <hr />
+    <div class="col-md-4 col-lg-offset-4">
+        <div class="productbox">
+            <img class="img-responsive" src="@Url.Content(Model.ProductImagePath)" alt="Image" />
+            <div class="producttitle">Product</div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Name
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ProductName)
+                </dd>
+
+                <dt>
+                    Description
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ProductDescription)
+                </dd>
+
+                <dt>
+                    Formulation
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ProductFormulation)
+                </dd>
+
+                <dt>
+                    Packaging Type
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ProductPackagingType)
+                </dd>
+
+            </dl>
+            <div class="productprice">
+                <div class="pull-right">
+                    @if (Model.ProductQuantity > 0)
+                    {
+                        <a class="btn btn-primary btm-sm" role="button" href='@string.Format("/Home/AddtoCart/{0}/", @Html.DisplayFor(model => model.ProductId))'>
+                            Add to <span class="glyphicon glyphicon-shopping-cart"></span>
+                        </a>
+                    }
+                    else
+                    {
+                        <img width="150px" height="80px" src="~/SiteImages/out-of-stock.png" />
+                    }
+
+                        
+                </div>
+                <div class="pricetext">@Html.DisplayFor(model => model.ProductSellingPrice) ‎৳</div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<a class="btn btn-info" href="/Home/ProductList">Back</a>
+
+
+<style>
+    /*for product showing    */
+    .productbox {
+        background-color: #ffffff;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #cfcfcf;
+        -moz-box-shadow: 2px 2px 4px 0px #cfcfcf;
+        -webkit-box-shadow: 2px 2px 4px 0px #cfcfcf;
+        box-shadow: 2px 2px 4px 0px #cfcfcf;
+        filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=4);
+    }
+
+    .producttitle {
+        font-weight: bold;
+        font-size: 1.2em;
+        padding: 5px 0 5px 0;
+    }
+
+    .producttext {
+    }
+
+    .productprice {
+        border-top: 1px solid #dadada;
+        padding-top: 5px;
+    }
+
+    .pricetext {
+        font-weight: bold;
+        font-size: 1.4em;
+    }
+</style>
+
+

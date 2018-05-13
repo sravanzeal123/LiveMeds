@@ -1,0 +1,94 @@
+﻿@model IEnumerable<LiveMedsEntity.Prescription>
+@{
+    ViewBag.Title = "ProductList";
+    //Layout = "~/Views/Shared/_UserLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr class="stylehr" />
+<br />
+<div class="container-fluid" style="background-color:#fafafa;">
+    <h3 style="text-align: center;">FEATURED PRESCRIPTIONS</h3>
+    <br/><br/>
+
+    <div>
+        <table class="table" align="center">
+            <tr>
+                <td>
+                    <div class="input-group col-md-6" id="searchbar">
+                        <input id="searchName" type="text" name="search" class="search-query form-control input-lg" placeholder="Search Prescription" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn-lg" onclick="SearchPrescription()" style="margin-top:0px;">
+                                <span class="glyphicon glyphicon-search"></span>
+
+                            </button>
+
+                            <button class="btn btn-info btn-lg" onclick="refresh()" style="margin-left:10px;">
+                                <span class="glyphicon glyphicon-refresh"></span>
+
+                            </button>
+                        </span>
+                       
+
+
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
+    <div id="products" class="container">
+        <div class="row">
+
+            <!-- Loop -->
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3 col-sm-4 col-xs-6">
+                    <div class="product">
+                        <a href='@string.Format("/Home/FeaturedProducts/{0}/", @Html.DisplayFor(modelItem => item.PrescriptionId))'>
+                            <figure>
+                                <h4>
+                                    @Html.DisplayFor(modelItem => item.PrescriptionCategoryName)
+                                </h4>
+                                <img class="rig-img" src="~/SiteImages/prescriptions.jpg" />
+
+                            </figure>
+                        </a>
+                        <div class="info">
+                            <h3> </h3>
+                                     <button onclick="location.href = '/Home/FeaturedProducts/@item.PrescriptionId'" class="btn btn-warning"><img src="~/SiteImages/cart.png" alt=""> View Products</button>
+                        </div>
+                    </div>
+                </div><!-- ./col-sm-4 -->
+            }
+            <!-- Loop End -->
+
+        </div>
+    </div>
+</div>
+
+
+    @section styles{
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/mystyles.css" rel="stylesheet" type="text/css" />
+    }
+
+<script>
+ function refresh() {
+
+        //alert(name);
+        location.href = "/Home/Prescriptions/";
+
+    }
+
+ function SearchPrescription()
+    {
+        var name = document.getElementById("searchName").value;
+     //alert(name);
+     if (name.length >0 )
+        location.href = "/Home/SearchPrescription/" + name;
+    }
+
+
+</script>

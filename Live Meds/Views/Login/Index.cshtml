@@ -1,0 +1,77 @@
+﻿@model Live_Meds.Models.LoginModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<br/><br/><br/><br/>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Login failed. Check your login details.");
+
+    <div class="container">
+
+        <div class="row" id="pwd-container">
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+                <section class="login-form">
+                    <form method="post" role="login">
+                        <img src="~/SiteImages/livemed.png" class="img-responsive" alt="Live Meds" />
+                        <input type="text" name="UserName" placeholder="Username" required class="form-control input-lg" />
+
+                        <input type="password" class="form-control input-lg" required placeholder="Password" name="Password" />
+
+
+                        <div class="pwstrength_viewport_progress"></div>
+
+
+                        <button type="submit" name="login" class="btn btn-lg btn-primary btn-block">Log In</button>
+                        <br/>
+                        <br /><br />
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+}
+<div class="errormessage">@ViewBag.User </div>
+
+<style>
+    .form-control {
+        position: relative;
+        font-size: 16px;
+        height: auto;
+        padding: 10px;
+        margin-top: 5px;
+    }
+
+    .login-form {
+        margin-top: 40px;
+        background-color: #f2f2f2;
+        padding: 15px;
+    }
+
+    .lin {
+        text-align: center;
+        margin-top: 2em;
+        margin-bottom: 50px;
+    }
+
+    .btn-block {
+        margin-top: 10px;
+        background-color: #3399cc;
+    }
+
+    .img-responsive {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+    }
+
+    .errormessage {
+        color: red;
+        font-weight: bold;
+    }
+</style>

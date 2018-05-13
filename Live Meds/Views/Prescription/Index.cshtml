@@ -1,0 +1,62 @@
+﻿@model IEnumerable<LiveMedsEntity.Prescription>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-info" >
+                <div class="panel-heading">
+                    <strong>Prescription List</strong>
+                    <a href="/Prescription/Create" class="pull-right"><i class="glyphicon glyphicon-plus"></i> AddNew</a>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PrescriptionCategoryName)
+                            </th>
+                            <th>Edit</th>
+                            <th>Details</th>
+                            <th>Delete</th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PrescriptionCategoryName)
+                                </td>
+                                <td><a href="/Prescription/Edit/@item.PrescriptionId"><i class="glyphicon glyphicon-edit"></i></a> </td>
+                                <td><a href="/Prescription/Details/@item.PrescriptionId"><i class="fa fa-info-circle" aria-hidden="true"></i></a></td>
+                                <td><a href="/Prescription/Delete/@item.PrescriptionId"><i class="glyphicon glyphicon-trash"></i></a></td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/adminHome">Back</a>
+</div>
+
+
+<style>
+    .btn-info {
+        background-color: #3399cc;
+    }
+
+   
+
+      
+</style>

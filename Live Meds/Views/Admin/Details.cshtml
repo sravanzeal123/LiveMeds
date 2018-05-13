@@ -1,0 +1,71 @@
+﻿@model LiveMedsEntity.Admin
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    Layout = "~/Views/Shared/_NullHeader.cshtml";
+}
+<b>Admin</b>
+<hr />
+<div>
+
+            <dl class="dl-horizontal">
+                <dt>
+                    Admin Name
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AdminName)
+                </dd>
+
+                <dt>
+                    User Name
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AdminUserName)
+                </dd>
+
+                <dt>
+                    Email
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AdminEmail)
+                </dd>
+
+                <dt>
+                    Password
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AdminPassword)
+                </dd>
+
+            </dl>
+        </div>
+        
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AdminId }, new { @class = "btn btn-info btn-block" })
+</p>
+
+
+
+
+
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.AdminId }) |
+        @Html.ActionLink("Close", "Index")
+    </p>*@
+<style>
+    .btn-info {
+        background-color: #3399cc;
+        margin-top: 10px;
+    }
+
+    .dl-horizontal {
+        margin-left: 1em;
+    }
+</style>

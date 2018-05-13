@@ -1,0 +1,70 @@
+﻿@model IEnumerable<LiveMedsEntity.Item>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div id="product-list" class="panel panel-info">
+                <div class="panel-heading">
+                    <strong>Product List</strong>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProductId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProductSellingPrice)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ItemCount)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Total)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductSellingPrice)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ItemCount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Total)
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/Order">Back</a>
+</div>
+
+

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<LiveMedsEntity.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <strong>Category List</strong>
+                    <a href="/Category/Create" class="pull-right"><i class="glyphicon glyphicon-plus"></i> AddNew</a>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>NAME</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                                <td><a href="/Category/Edit/@item.CategoryId"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                <td><a href="/Category/Delete/@item.CategoryId"><i class="glyphicon glyphicon-trash"></i></a></td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/adminHome">Back</a>
+</div>
+

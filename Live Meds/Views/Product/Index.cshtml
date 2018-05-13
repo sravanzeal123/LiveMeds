@@ -1,0 +1,85 @@
+﻿@model IEnumerable<LiveMedsEntity.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<br/> <br /> <br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div  class="panel panel-info">
+                <div class="panel-heading">
+                    <strong>Product List</strong>
+                    <a href="/Product/Create" class="pull-right"><i class="glyphicon glyphicon-plus"></i> AddNew</a>
+                   
+                </div>
+                <div id="HTMLtoPDF" class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <th>NAME</th>
+                            <th>BUYING PRICE</th>
+                            <th>SELLING PRICE</th>
+                            <th>QUANTITY</th>
+                            <th>SOLD</th>
+                            <th>FORMULATION</th>
+                            <th>PACKAGING TYPE</th>
+                            <th>Image</th>
+                            <th>Edit</th>
+                            <th>Details</th>
+                            <th>Delete</th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ProductBuyingPrice)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ProductSellingPrice)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ProductQuantity)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ProductSold)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ProductFormulation)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ProductPackagingType)</td>
+                                <td><img class="" height="80px" width="100px" src="@Url.Content(item.ProductImagePath)" alt="Image" /></td>
+                                <td><a href="/Product/Edit/@item.ProductId"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                <td><a href="/Product/Details/@item.ProductId"><i class="fa fa-info-circle" aria-hidden="true"></i></a></td>
+                                <td><a class="delete" href="/Product/Delete/@item.ProductId"><i class="glyphicon glyphicon-trash"></i></a></td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/adminHome">Back</a>
+</div>
+
+<script>
+    $(".delete").click(function () {
+        $.notify("Product Deleted !!!", {
+            type: "danger",
+            allow_dismiss: false,
+            animate: {
+                enter: 'animated fadeInRight',
+                exit: 'animated fadeOutRight'
+            },
+            placement: {
+                align: "right"
+            },
+            offset: {
+                x: 50,
+                y: 60
+            }
+        });
+    });
+</script>
+
+
+@section styles{
+    <link href="~/Content/mystyles.css" rel="stylesheet" type="text/css" />
+}

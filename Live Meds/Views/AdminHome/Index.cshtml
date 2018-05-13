@@ -1,0 +1,236 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@{ 
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+<h2>Index</h2>
+
+<div>
+
+    @foreach (var product in ViewBag.products)
+    {
+        <input id="@product.ProductName" type="hidden" value="@product.ProductQuantity"/>
+    }
+
+    <div class="panel panel-primary">
+        <div class="panel-heading text-center">All Reports</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <canvas id="myChart"></canvas>
+                    </div>
+
+                    <div class="col-md-6">
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <canvas id="radar-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <br /><br />
+            <div class="panel panel-info">
+                <div class="panel-heading text-center">Top Sold Products</div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <th>NAME</th>
+                            <th>BUYING PRICE</th>
+                            <th>SELLING PRICE</th>
+                            <th>QUANTITY</th>
+                            <th>SOLD</th>
+                            <th>FORMULATION</th>
+                            <th>PACKAGING TYPE</th>
+                            <th>Image</th>
+                        </tr>
+
+                        @foreach (var item in ViewBag.TopProducts)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.ProductBuyingPrice</td>
+                                <td>@item.ProductSellingPrice</td>
+                                <td>@item.ProductQuantity</td>
+                                <td>@item.ProductSold</td>
+                                <td>@item.ProductFormulation</td>
+                                <td>@item.ProductPackagingType</td>
+                                <td><img class="" height="80px" width="100px" src="@Url.Content(item.ProductImagePath)" alt="Image" /></td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+                </div>
+            
+
+        </div>
+    </div>
+
+<script>
+
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var buy = @ViewBag.totalBuy;
+    var sell = @ViewBag.totalSell;
+    var order = @ViewBag.totalOrder;
+    var delivery = @ViewBag.totalDelivery;
+    var p1 = $("#demo").val();
+    var p2 = $("#Name").val();
+
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Buy", "Sell"],
+            datasets: [{
+                label: ["Buy"],
+                data: [buy],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)'
+                ],
+                borderWidth: 1
+            },
+            {
+                label: ["Sell"],
+                data: [sell],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 1
+            }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Buying & Selling Statistics'
+            },
+            animation: {
+                duration: 5000
+            },
+            responsive: true,
+
+            scales: {
+                xAxes: [{
+                    barPercentage: 0.3
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["Demo", "Name", "Product 3", "Product 4", "Product 5"],
+            datasets: [{
+                label: "Products",
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [p1, p2, 10, 25, 45],
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            title: {
+                display: true,
+                text: 'Products Statistics According To Quantity'
+            },
+            animation: {
+                duration: 5000
+            },
+            responsive: true,
+        }
+    });
+
+    var ctx = document.getElementById('pieChart').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ["Order", "Delivery"],
+            datasets: [{
+                data: [order, delivery],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Order & Delivery Statistics'
+            },
+            animation: {
+                duration: 5000
+            },
+            responsive: true,
+        }
+    });
+
+    var ctx = document.getElementById('radar-chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'radar',
+
+        // The data for our dataset
+        data: {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                label: "My First dataset",
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 5, 2, 20, 30, 45],
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            title: {
+                display: true,
+                text: 'Buying & Selling Statistics'
+            },
+            animation: {
+                duration: 5000
+            },
+            responsive: true,
+        }
+    });
+
+</script>
+    
+</div>
+

@@ -1,0 +1,254 @@
+﻿@model Live_Meds.Models.HomeModel
+
+@{
+    ViewBag.Title = "ProductList";
+    //Layout = "~/Views/Shared/_UserLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<div class="container-fluid">
+    <br />
+    <br />
+    <h3>FEATURED CATEGORIES</h3>
+    <hr class="stylehr" />
+    <div>
+        <table class="table" align="center">
+            <tr>
+                <td>
+                    <div class="input-group col-md-6" id="searchbar">
+                        <input id="searchCategoryName" type="text" name="search" class="search-query form-control input-lg" placeholder="Search Anything" />
+                        <span class="input-group-btn">
+                            
+                        </span>
+                        <button class=" btn btn-info btn-lg" onclick="refresh()" style="margin-left:10px;">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                        </button>
+
+
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
+
+
+    <div id="categoryProducts" class="container">
+        <div class="row">
+
+
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="background-color:#77c9d4;">
+            <!-- Indicators -->
+            @*<ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>*@
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <br />
+                    <div class="hover-slide text-center">
+                        <a href="~/Home/FeaturedCategory/@Model.Categories[0].CategoryId" target="_blank" class="Hfour"><img class="hover-slide text-center slideItem" src="~/SiteImages/category.png" alt="Category" style="width:200px;height:200px; margin: 0 auto;"><br />@Html.DisplayFor(modelItem => Model.Categories[0].CategoryName)</a>
+                    </div>
+
+                </div>
+               
+                @for (int i = 1; i <  @Model.Categories.Count  ; i++)
+                {
+                    <div class="item">
+                        <br />
+                        <div class="hover-slide text-center">
+                            <a href="~/Home/FeaturedCategory/@Model.Categories[i].CategoryId" target="_blank" class="Hfour"><img class="hover-slide text-center slideItem" src="~/SiteImages/category.png" alt="Category" style="width:200px;height:200px; margin: 0 auto;"><br />@Html.DisplayFor(modelItem => Model.Categories[i].CategoryName)</a>
+                        </div>
+
+                    </div>
+                }
+                    
+                
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="stylehr" />
+
+<div class="container-fluid" style="background-color:#fafafa;">
+    <h3>PRODUCTS</h3>
+
+
+    <!-- Product showing starts here -->
+ 
+    <div id="products" class="container">
+        <div class="row">
+
+            <!-- Loop -->
+            @foreach (var item in Model.Products)
+            {
+                <div class="col-md-3 col-sm-4 col-xs-6">
+                    <div class="product">
+                        <a href='@string.Format("/Home/Details/{0}/", @Html.DisplayFor(modelItem => item.ProductId))'>
+                            <figure>
+                                <h4>
+                                    @Html.DisplayFor(modelItem => item.ProductName)
+                                </h4>
+                                <img src="@Url.Content(item.ProductImagePath)" alt="">
+                            </figure>
+                        </a>
+                        <div class="info">
+                            <h3>@Html.DisplayFor(modelItem => item.ProductSellingPrice)  ‎৳</h3>
+                            @if (item.ProductQuantity > 0)
+                            {
+                                <button onclick="addtocart(@item.ProductId)" class="btn btn-warning"><img src="~/SiteImages/cart.png" alt=""> ADD TO CART</button>
+                            }
+                            else
+                            {
+                                <img width="200px" height="80px" src="~/SiteImages/out-of-stock.png" />
+                            }
+
+
+
+                        </div>
+                    </div>
+                </div><!-- ./col-sm-4 -->
+            }
+            <!-- Loop End -->
+
+        </div>
+    </div>
+</div>
+
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
+<style>
+    h3 {
+        font-family: 'PT Serif', serif;
+        text-align: center;
+    }
+
+    .Hfour {
+        font-family: 'PT Serif', serif;
+        text-align: center;
+        font-size: 20px;
+        color: #fafafa;
+    }
+
+    hr.stylehr {
+        border-top: 1px dashed #3399cc;
+    }
+
+        hr.stylehr:after {
+            content: '\002702';
+            position: relative;
+            top: -12px;
+            left: 40px;
+            padding: 0 3px;
+            color: #3399cc;
+            font-size: 18px;
+        }
+
+    .slideItem:hover {
+        box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    }
+</style>
+
+@section styles{
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/mystyles.css" rel="stylesheet" type="text/css" />
+}
+<style>
+
+    #myModal {
+        width: 100%;
+       
+    }
+</style>
+<script>
+    function addtocart(id)
+    {
+        $.ajax({
+            url: "/Home/AddtoCart/" + id,
+            type: 'GET',
+            success: function (data, status) {
+               // window.location.reload();
+                $.notify("Product Added To Cart !!!", {
+                    type: "success",
+                    allow_dismiss: false,
+                    animate: {
+                        enter: 'animated fadeInRight',
+                        exit: 'animated fadeOutRight'
+                    },
+                    placement: {
+                        align: "right"
+                    },
+                    offset: {
+                        x: 50,
+                        y: 60
+                    }
+                });
+
+                setTimeout(function() {
+                    $.notifyClose();
+                }, 2000);
+                setTimeout(function() {
+                    window.location.reload();
+                }, 2500);
+            }
+        });
+      
+    }
+
+    function Search()
+    {
+        
+        var name = document.getElementById("searchName").value;
+        //alert(name);
+        if (name.length > 0)
+        location.href = "/Home/SearchProduct/"+name;
+       
+    }
+
+    function refresh() {
+
+        //alert(name);
+        location.href = "/Home/ProductList/";
+
+    }
+
+    function SearchByCategory()
+    {
+        var name = document.getElementById("searchCategoryName").value;
+        //alert(name);
+        if (name.length > 0)
+        location.href = "/Home/SearchByCategory/" + name;
+    }
+
+    $("#searchCategoryName").keyup(function ()
+    {
+        var name = document.getElementById("searchCategoryName").value;
+        //if (name.length > 0)
+        $("#categoryProducts").load("/Home/FilterSearch/" + name + "/Category");
+        // alert(name);
+    });
+
+ 
+</script>

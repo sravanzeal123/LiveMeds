@@ -1,0 +1,93 @@
+﻿@model IEnumerable<LiveMedsEntity.Product>
+
+@{
+    ViewBag.Title = "product";
+}
+
+<h2>product</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductBuyingPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductSellingPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductSold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductImagePath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductFormulation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductPackagingType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManufacturerId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductBuyingPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductSellingPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductSold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductImagePath)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductFormulation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductPackagingType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ManufacturerId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
+        </td>
+    </tr>
+}
+
+</table>

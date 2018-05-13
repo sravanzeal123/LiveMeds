@@ -1,0 +1,88 @@
+﻿@model LiveMedsEntity.Admin
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@{
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+<div class="container">
+
+    <div class="row" id="pwd-container">
+        <div class="col-md-4"></div>
+  
+        <div class="col-md-4">
+            <section class="login-form">
+                <form method="post">
+                    <img src="~/SiteImages/livemed.png" class="img-responsive" alt="Live Meds" />
+                    <input type="text" name="AdminName" placeholder="Admin Name" required class="form-control input-lg" />
+
+                    <input type="text" name="AdminUserName" placeholder="Admin User Name" required class="form-control input-lg" />
+
+                    <input type="email" name="AdminEmail" placeholder="Admin Email" required class="form-control input-lg" />
+
+                    <input type="password" name="AdminPassword" placeholder="Admin Password" required class="form-control input-lg" />
+
+
+                    @* ADD Confirm password in model *@
+
+                    <button type="submit" name="signup" class="btn btn-lg btn-primary btn-block">Sign Up</button>
+
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<style>
+    .btn-primary {
+        background-color: #3399cc;
+    }
+
+    .form-control {
+        position: relative;
+        font-size: 16px;
+        height: auto;
+        padding: 10px;
+        margin-top: 5px;
+    }
+
+    .login-form {
+        margin-top: 70px;
+        background-color: #f2f2f2;
+        padding: 15px;
+    }
+
+    .lin {
+        text-align: center;
+        margin-top: 2em;
+        margin-bottom: 50px;
+    }
+
+    .btn-block {
+        margin-top: 10px;
+        background-color: #3399cc;
+    }
+
+    .img-responsive {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+    }
+
+    .errormessage {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+

@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap-notify.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/animate.css" rel="stylesheet" type="text/css" />
+    @RenderSection("styles", false)
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    @RenderSection("scripts", false)
+</head>
+<body>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="output"> hello </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <nav class="navbar navbar-default navbar-fixed-top" style="background-color:#3399cc;">
+        <div class=" container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
+
+            </div>
+
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Live Meds", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("Products", "ProductList", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                <li>@Html.ActionLink("Prescription", "Prescriptions", "Home")</li>
+                <li>@Html.ActionLink("OTC", "OTC", "Home")</li>
+                <li>@Html.ActionLink("Diabetes", "Diabetes", "Home")</li>
+                <li>@Html.ActionLink("Baby & Mother", "BabyAndMother", "Home")</li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Admin Login", "Index", "Login")</li>
+                @if (Session["name"] != null)
+                {
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="glyphicon glyphicon-user"></i> @Session["name"]
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/UserHome"><i class="glyphicon glyphicon-user"></i> My Profile</a></li>
+                            <li><a href="/UserHome/ChangePassword"><i class="glyphicon glyphicon-cog"></i> Change Password</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/UserHome/Logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Login", "Index", "UserLogin")</li>
+                }
+
+                <li>
+                    
+                    <a  href="/Home/Cart">
+                        <i class="glyphicon glyphicon-shopping-cart"></i> Cart
+                        @if (Session["ItemCount"] != null)
+                        {
+                            <span class="badge label label-danger">@Session["ItemCount"]</span>
+                        }
+                        else
+                        {
+                            <span class="badge label label-danger">0</span>
+                        }
+
+                    </a>
+                </li>
+            </ul>
+
+
+        </div>
+    </nav>
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr class="stylehr" />
+        <footer>
+            <p>&copy; @DateTime.Now.Year Live Meds </p>
+        </footer>
+    </div>
+
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>*@
+</body>
+</html>
+<script>
+    $("#step1").click(function () {
+        $("#output").load("/Home/ShowCart/");
+    });
+
+</script>
+<style>
+    body {
+        font-family: 'PT Serif', serif;
+    }
+
+    hr.stylehr {
+        border-top: 1px dashed #3399cc;
+    }
+
+        hr.stylehr:after {
+            content: '\002702';
+            position: relative;
+            top: -12px;
+            left: 40px;
+            padding: 0 3px;
+            color: #3399cc;
+            font-size: 18px;
+        }
+
+    .nav.navbar-nav.navbar-right li a {
+        color: white;
+        font-size: 18px;
+    }
+
+    .nav.navbar-nav li a {
+        color: white;
+        font-size: 18px;
+    }
+
+    .dropdown-menu {
+        background-color:#3399cc;
+
+    }
+</style>

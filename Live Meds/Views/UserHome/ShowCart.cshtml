@@ -1,0 +1,124 @@
+﻿@model IEnumerable<LiveMedsEntity.Item>
+
+@{
+    ViewBag.Title = "ShowCart";
+}
+
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<h2>ShowCart</h2>
+
+
+<table class="table" id="cart">
+    <tr>
+        <th>
+            Product Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+
+                <input type="hidden" class="item-price" value="@item.ProductSellingPrice">
+                <input type="hidden" class="item-id" value="@item.ProductId">
+                <input type="number" class="item" value="@item.ItemCount">
+
+            </td>
+            <td>
+                <input type="number" class="item-total" value="@item.Total" readonly>
+
+                @*@Html.DisplayFor(modelItem => item.Total)*@
+            </td>
+            <td>
+
+                @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                @Html.ActionLink("Delete", "Remove", new { id = item.ProductId })
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+
+<script type="text/javascript">
+    updateCartTotal();
+</script>
+
+
+
+Total <input type="number" value="0" id="total-cost" readonly>
+<a class="btn-danger btn" href="/Home/CheckOut">Check Out</a>
+
+<script type="text/javascript">
+    window.onload = function () {
+        updateCartTotal();
+    }
+    var elements = document.querySelectorAll('.item');
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].addEventListener('change', function (e) {
+
+            var parent = this.closest('tr');
+            var price = parent.querySelector('.item-price').value;
+            var id = parent.querySelector('.item-id').value;
+            var qty = this.value;
+
+            var total = price * qty;
+            parent.querySelector('.item-total').value = total;
+            alert('/Home/UpdateCart/' + id + '/' + qty);
+            $.ajax({
+
+                url: '/Home/UpdateCart/' + id + '/' + qty,
+                type: 'GET',
+                success: function (data, status) {
+
+
+                }
+            });
+            updateCartTotal();
+
+        }, false);
+
+        elements[i].addEventListener('keyup', function (e) {
+
+            var parent = this.closest('tr');
+            var price = parent.querySelector('.item-price').value;
+            var qty = this.value;
+
+            var total = price * qty;
+            parent.querySelector('.item-total').value = total;
+            updateCartTotal();
+        }, false);
+    }
+    function updateSession() {
+
+    }
+    function updateCartTotal() {
+        var netTotal = 0;
+        var subTotal = document.querySelectorAll('#cart tr .item-total');
+
+        for (var i = 0; i < subTotal.length; i++) {
+            if (parseFloat(subTotal[i].value)) {
+                netTotal += parseFloat(subTotal[i].value);
+            }
+        }
+
+        document.querySelector('#total-cost').value = netTotal;
+
+    }
+</script>

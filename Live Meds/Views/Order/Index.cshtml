@@ -1,0 +1,104 @@
+﻿@model IEnumerable<LiveMedsEntity.Order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <strong>Order List</strong>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UserId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Total)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OrderTime)
+                            </th>
+                            @*<th>
+                                @Html.DisplayNameFor(model => model.Delivered)
+                            </th>*@
+                            <th>Details</th>
+                            <th>Delivery</th>
+                            <th>Cancel</th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Total)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderTime)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.Delivered)
+                                </td>*@
+                                <td>
+                                    <a href="/Order/Details/@item.OrderId"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></a>
+                                </td>
+                                <td>
+                                    <a class="delivered" onclick="myFunction()";" href="/Order/Delivered/@item.OrderId"> <i class="fa fa-check fa-lg" aria-hidden="true"></i></a>
+                                </td>
+                                <td>
+                                    <a href="/Order/Delete/@item.OrderId">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                
+
+                    </table>
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/adminHome">Back</a>
+</div>
+<script>
+    function myFunction() {
+        $.notify("Product Delivered !!!", {
+            type: "success",
+            allow_dismiss: false,
+            animate: {
+                enter: 'animated fadeInRight',
+                exit: 'animated fadeOutRight'
+            },
+            placement: {
+                align: "right"
+            },
+            offset: {
+                x: 50,
+                y: 60
+            }
+        });
+        setTimeout(function () {
+            $.notifyClose();
+        }, 2000);
+    }
+        
+
+
+</script>

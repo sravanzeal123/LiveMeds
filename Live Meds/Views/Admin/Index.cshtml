@@ -1,0 +1,75 @@
+﻿@model IEnumerable<LiveMedsEntity.Admin>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div id="myModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+            @*@Html.Partial("My partial View")*@
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <strong>Admin List</strong>
+                    <a href="/Admin/Create" class="pull-right"><i class="glyphicon glyphicon-plus"></i> AddNew</a>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>NAME</th>
+                            <th>USER NAME</th>
+                            <th>EMAIL</th>
+                            <th>PASSWORD</th>
+                            <th>Info</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.AdminName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AdminUserName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AdminEmail)</td>
+                                <td>*******</td>
+                                <td><a href="/Admin/Details/@item.AdminId"><i class="fa fa-info-circle"></i></a></td>
+                                <td>
+                                    <a href="/Admin/Edit/@item.AdminId"><i class="glyphicon glyphicon-edit"></i></a>
+                                </td>
+                                <td><a href="/Admin/Delete/@item.AdminId"><i class="glyphicon glyphicon-trash"></i></a></td>
+                                
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/adminHome">Back</a>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+<script src="//getbootstrap.com/2.3.2/assets/js/bootstrap-modal.js"></script>
+<script src="script.js"></script>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<LiveMedsEntity.User>
+
+@{
+    ViewBag.Title = "Profile";
+}
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="panel panel-info">
+                <div class="panel-heading text-center">
+                    <strong>Profile Info</strong>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "ProfileEdit", new { id = item.UserId })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

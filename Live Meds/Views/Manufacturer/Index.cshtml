@@ -1,0 +1,59 @@
+﻿@model IEnumerable<LiveMedsEntity.Manufacturer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <strong>Manufacturer List</strong>
+                    <a href="/Manufacturer/Create" class="pull-right"><i class="glyphicon glyphicon-plus"></i> AddNew</a>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ManufactureName)
+                            </th>
+                            <th>Edit</th>
+                            <th>Details</th>
+                            <th>Delete</th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ManufactureName)
+                                </td>
+                                <td><a href="/Manufacturer/Edit/@item.ManufacturerId"><i class="glyphicon glyphicon-edit"></i></a> </td>
+                                <td><a href="/Manufacturer/Details/@item.ManufacturerId"><i class="fa fa-info-circle" aria-hidden="true"></i></a></td>
+                                <td><a href="/Manufacturer/Delete/@item.ManufacturerId"><i class="glyphicon glyphicon-trash"></i></a></td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/adminHome">Back</a>
+</div>
+
+
+<style>
+    .btn-info {
+        background-color: #3399cc;
+    }
+
+    
+</style>

@@ -1,0 +1,53 @@
+﻿@model LiveMedsEntity.Category
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@{
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Category</h4>
+        <hr />
+
+        <div class="form-group">
+            <div class="col-lg-6">
+                <input type="text" required name="CategoryName" class="form-control input-lg" placeholder="Catagory Name" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-6">
+                <input type="submit" value="Create" class="btn btn-info btn-lg" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <a id="back" class="btn btn-md btn-info" href="~/Category/Index"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back</a>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<style>
+    .btn-info {
+        background-color: #3399cc;
+        margin-top: -10px;
+    }
+</style>

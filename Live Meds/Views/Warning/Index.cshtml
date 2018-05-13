@@ -1,0 +1,46 @@
+﻿@model IEnumerable<LiveMedsEntity.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-danger">
+                <div class="panel-heading text-center">
+                    <strong>Low Quantity Product List</strong>
+                </div>
+                <div id="HTMLtoPDF" class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <th>NAME</th>
+                            <th>QUANTITY</th>
+                            <th>SOLD</th>
+                            <th>Image</th>
+                            <th>Edit</th>
+                            <th>Details</th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ProductQuantity)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ProductSold)</td>
+                                <td><img class="" height="80px" width="100px" src="@Url.Content(item.ProductImagePath)" alt="Image" /></td>
+                                <td><a href="/Product/Edit/@item.ProductId"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                <td><a href="/Product/Details/@item.ProductId"><i class="fa fa-info-circle" aria-hidden="true"></i></a></td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/adminHome">Back</a>
+</div>

@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap-notify.js"></script>
+    <script src="~/Scripts/jspdf.js"></script>
+    <script src="~/Scripts/pdfFromHTML.js"></script>
+    <script src="~/Scripts/Chart.bundle.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/navbar-fixed-side.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/animate.css" rel="stylesheet" type="text/css" />
+
+    <style>
+    </style>
+
+    @RenderSection("styles", false)
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    @RenderSection("scripts", false)
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top" style="background-color:#3399cc;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+
+            <div class="navbar-collapse ">
+                <ul class="nav navbar-nav" >
+                    <li>@Html.ActionLink("Home", "Index", "AdminHome", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Admin", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Categories", "Index", "Category", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Delivery", "Index", "Delivery", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Manufacturers", "Index", "Manufacturer", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Orders", "Index", "Order", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Prescriptions", "Index", "Prescription", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Products", "Index", "Product", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Users", "Index", "User", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Warning !!!", "Index", "Warning", new { area = "" }, new { @class = "navbar-brand" })</li>
+
+                    </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Logout", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+<style>
+    body {
+        font-family: 'PT Serif', serif;
+    }
+
+    hr.stylehr {
+        border-top: 1px dashed #3399cc;
+    }
+
+        hr.stylehr:after {
+            content: '\002702';
+            position: relative;
+            top: -12px;
+            left: 40px;
+            padding: 0 3px;
+            color: #3399cc;
+            font-size: 18px;
+        }
+
+    .nav.navbar-nav.navbar-right  {
+        color: white;
+        font-size: 18px;
+    }
+
+    .nav.navbar-nav li a {
+        color: white;
+        font-size: 18px;
+    }
+
+    .dropdown-menu {
+        background-color: #3399cc;
+    }
+</style>

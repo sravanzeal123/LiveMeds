@@ -1,0 +1,78 @@
+﻿@model LiveMedsEntity.Prescription
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@{
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Prescription</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Category Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrescriptionCategoryName)
+        </dd>
+       <br/>
+        <div class="container">
+
+            <div class="row">
+
+
+                <div class="col-md-12 ">
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <strong>Product List</strong>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table ">
+                                <tr>
+                                    <th>NAME</th>
+                                    <th>BUYING PRICE</th>
+                                    <th>SELLING PRICE</th>
+                                    <th>QUANTITY</th>
+                                    <th>SOLD</th>
+                                    <th>FORMULATION</th>
+                                    <th>PACKAGING TYPE</th>
+                                    <th>Image</th>
+
+                                </tr>
+
+                                @foreach (var item in Model.Products)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ProductBuyingPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ProductSellingPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ProductQuantity)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ProductSold)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ProductFormulation)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.ProductPackagingType)</td>
+                                        <td><img class="" height="80px" width="100px" src="@Url.Content(item.ProductImagePath)" alt="Image" /></td>
+
+                                    </tr>
+                                }
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PrescriptionId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
